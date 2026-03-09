@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ACER\\OneDrive - islingtoncollege.edu.np\\Desktop\\visual studio\\KumariCinemas\\idk\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ACER\\OneDrive - islingtoncollege.edu.np\\Desktop\\visual studio\\KumariCinemas\\idk\\MovieForm.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:MovieForm.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ACER\\OneDrive - islingtoncollege.edu.np\\Desktop\\visual studio\\KumariCinemas\\idk\\MovieForm.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:MovieForm.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ACER\\OneDrive - islingtoncollege.edu.np\\Desktop\\visual studio\\KumariCinemas\\idk\\CustomerForm.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CustomerForm.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MovieForm.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\OneDrive - islingtoncollege.edu.np\\Desktop\\visual studio\\KumariCinemas\\idk\\MovieForm.aspx.cs",
+              "RelativeDocumentMoniker": "MovieForm.aspx.cs",
+              "ToolTip": "C:\\Users\\ACER\\OneDrive - islingtoncollege.edu.np\\Desktop\\visual studio\\KumariCinemas\\idk\\MovieForm.aspx.cs",
+              "RelativeToolTip": "MovieForm.aspx.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAiwG4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-06T16:14:17.02Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MovieForm.aspx",
+              "DocumentMoniker": "C:\\Users\\ACER\\OneDrive - islingtoncollege.edu.np\\Desktop\\visual studio\\KumariCinemas\\idk\\MovieForm.aspx",
+              "RelativeDocumentMoniker": "MovieForm.aspx",
+              "ToolTip": "C:\\Users\\ACER\\OneDrive - islingtoncollege.edu.np\\Desktop\\visual studio\\KumariCinemas\\idk\\MovieForm.aspx",
+              "RelativeToolTip": "MovieForm.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-03-06T16:14:05.26Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CustomerForm.aspx",
+              "DocumentMoniker": "C:\\Users\\ACER\\OneDrive - islingtoncollege.edu.np\\Desktop\\visual studio\\KumariCinemas\\idk\\CustomerForm.aspx",
+              "RelativeDocumentMoniker": "CustomerForm.aspx",
+              "ToolTip": "C:\\Users\\ACER\\OneDrive - islingtoncollege.edu.np\\Desktop\\visual studio\\KumariCinemas\\idk\\CustomerForm.aspx",
+              "RelativeToolTip": "CustomerForm.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-03-06T16:13:41.797Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
