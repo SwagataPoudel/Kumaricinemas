@@ -2,131 +2,255 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500&display=swap');
-
         .page-header {
-            display: flex; align-items: flex-end; justify-content: space-between;
-            margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid #1a1a1a;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #e5e0d8;
         }
-        .page-header-left h2 {
-            font-family: 'Syne', sans-serif; font-size: 52px; font-weight: 800;
-            line-height: 1; letter-spacing: -2px; color: #1a1a1a;
+        .page-header h2 {
+            font-size: 36px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: #1c1c1c;
         }
-        .page-header-left p { color: #888; font-size: 13px; margin-top: 6px; }
+        .page-header p {
+            color: #888;
+            font-size: 15px;
+            margin-top: 5px;
+        }
         .page-badge {
-            background: #1a1a1a; color: #f5f0e8; padding: 8px 18px;
-            border-radius: 100px; font-size: 12px; font-weight: 500; letter-spacing: 1px;
+            background: #f2ede6;
+            color: #b07d3a;
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.4px;
         }
+
+        /* Filter */
         .filter-card {
-            background: #1a1a1a; border-radius: 20px; padding: 28px;
-            color: #f5f0e8; margin-bottom: 24px;
+            background: #ffffff;
+            border: 1px solid #e8e4de;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
         }
         .filter-card h3 {
-            font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700;
-            letter-spacing: 1px; text-transform: uppercase; color: #c8a96e; margin-bottom: 20px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #b07d3a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
         }
-        .filter-row { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: end; }
+        .filter-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 16px;
+            align-items: end;
+        }
         .field label {
-            display: block; font-size: 10px; letter-spacing: 2px;
-            text-transform: uppercase; color: #666; margin-bottom: 6px;
+            display: block;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 6px;
         }
         .field select {
-            width: 100%; background: #111; border: 1px solid #2a2a2a;
-            border-radius: 10px; padding: 11px 14px; color: #f5f0e8;
-            font-family: 'Inter', sans-serif; font-size: 14px;
+            width: 100%;
+            background: #fafaf8;
+            border: 1px solid #e8e4de;
+            border-radius: 7px;
+            padding: 10px 13px;
+            color: #1c1c1c;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            transition: border-color 0.15s;
+            appearance: auto;
         }
-        .field select:focus { outline: none; border-color: #c8a96e; }
-        .field select option { background: #1a1a1a; }
+        .field select:focus { outline: none; border-color: #b07d3a; }
         .btn-search {
-            background: #c8a96e; color: #1a1a1a; border: none;
-            border-radius: 10px; padding: 11px 28px; font-family: 'Inter', sans-serif;
-            font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+            background: #b07d3a;
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            padding: 10px 24px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.15s;
+            white-space: nowrap;
         }
-        .btn-search:hover { opacity: 0.85; transform: translateY(-1px); }
+        .btn-search:hover { background: #9a6c30; }
 
-        /* Movie Info */
+        /* Movie Banner */
         .movie-banner {
-            background: white; border: 1px solid #e8e0d0; border-radius: 16px;
-            padding: 24px; margin-bottom: 24px; display: flex;
-            align-items: center; gap: 24px;
+            background: #ffffff;
+            border: 1px solid #e8e4de;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
-        .movie-banner-icon { font-size: 48px; }
+        .movie-banner-icon { font-size: 40px; }
         .movie-banner h3 {
-            font-family: 'Syne', sans-serif; font-size: 24px;
-            font-weight: 800; color: #1a1a1a; margin-bottom: 6px;
+            font-size: 22px;
+            font-weight: 600;
+            color: #1c1c1c;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
         }
-        .movie-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+        .movie-meta { display: flex; gap: 10px; flex-wrap: wrap; }
         .movie-tag {
-            background: #faf0e0; color: #c8a96e; padding: 4px 12px;
-            border-radius: 100px; font-size: 12px; font-weight: 500;
+            background: #f2ede6;
+            color: #b07d3a;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
         }
 
-        /* Top 3 Cards */
-        .podium { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 32px; }
+        /* Podium */
+        .podium {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
         .podium-card {
-            background: white; border: 1px solid #e8e0d0;
-            border-radius: 20px; padding: 24px; text-align: center;
-            position: relative; overflow: hidden;
+            background: #ffffff;
+            border: 1px solid #e8e4de;
+            border-radius: 12px;
+            padding: 22px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        .podium-card.rank-1 { border-top: 4px solid #c8a96e; }
-        .podium-card.rank-2 { border-top: 4px solid #94a3b8; }
-        .podium-card.rank-3 { border-top: 4px solid #cd7c2f; }
+        .podium-card.rank-1 { border-top: 3px solid #b07d3a; }
+        .podium-card.rank-2 { border-top: 3px solid #94a3b8; }
+        .podium-card.rank-3 { border-top: 3px solid #c2783a; }
         .rank-badge {
-            position: absolute; top: 16px; right: 16px;
-            font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800;
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            font-size: 22px;
+            font-weight: 700;
         }
-        .rank-1 .rank-badge { color: #c8a96e; }
+        .rank-1 .rank-badge { color: #b07d3a; }
         .rank-2 .rank-badge { color: #94a3b8; }
-        .rank-3 .rank-badge { color: #cd7c2f; }
+        .rank-3 .rank-badge { color: #c2783a; }
         .podium-card h4 {
-            font-family: 'Syne', sans-serif; font-size: 18px;
-            font-weight: 800; color: #1a1a1a; margin-bottom: 4px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #1c1c1c;
+            margin-bottom: 4px;
+            padding-right: 32px;
         }
-        .podium-city { font-size: 12px; color: #888; margin-bottom: 16px; }
+        .podium-city {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 16px;
+        }
         .occupancy-bar-wrap {
-            background: #f0ebe0; border-radius: 100px;
-            height: 8px; margin-bottom: 12px; overflow: hidden;
+            background: #f0ebe0;
+            border-radius: 100px;
+            height: 7px;
+            margin-bottom: 12px;
+            overflow: hidden;
         }
         .occupancy-bar {
-            height: 100%; border-radius: 100px;
-            background: linear-gradient(90deg, #c8a96e, #e8c98e);
+            height: 100%;
+            border-radius: 100px;
+            background: linear-gradient(90deg, #b07d3a, #d4a05a);
             transition: width 1s ease;
         }
         .occupancy-pct {
-            font-family: 'Syne', sans-serif; font-size: 36px;
-            font-weight: 800; color: #1a1a1a; line-height: 1;
+            font-size: 32px;
+            font-weight: 700;
+            color: #1c1c1c;
+            line-height: 1;
+            letter-spacing: -1px;
         }
-        .podium-stats { display: flex; justify-content: space-around; margin-top: 16px; }
-        .podium-stat label { display: block; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #aaa; }
-        .podium-stat span { font-size: 16px; font-weight: 600; color: #1a1a1a; }
+        .podium-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid #f0ebe0;
+        }
+        .podium-stat label {
+            display: block;
+            font-size: 10px;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 3px;
+        }
+        .podium-stat span {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1c1c1c;
+        }
 
-        /* Full Table */
-        .table-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #e8e0d0; }
-        .table-card-header {
-            padding: 20px 24px; border-bottom: 1px solid #e8e0d0;
-            display: flex; align-items: center; justify-content: space-between;
+        /* Table */
+        .table-card {
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e8e4de;
         }
-        .table-card-header h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: #1a1a1a; }
+        .table-card-header {
+            padding: 18px 22px;
+            border-bottom: 1px solid #e8e4de;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .table-card-header h3 {
+            font-size: 16px;
+            font-weight: 500;
+            color: #1c1c1c;
+        }
         .grid-scroll { overflow-x: auto; }
         table.datagrid { width: 100%; border-collapse: collapse; }
         table.datagrid th {
-            background: #faf7f2; padding: 12px 16px; text-align: left;
-            font-size: 10px; font-weight: 600; text-transform: uppercase;
-            letter-spacing: 1.5px; color: #888; border-bottom: 1px solid #e8e0d0;
+            background: #fafaf8;
+            padding: 11px 16px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #999;
+            border-bottom: 1px solid #e8e4de;
         }
-        table.datagrid td { padding: 13px 16px; border-bottom: 1px solid #f0ebe0; font-size: 13px; color: #333; }
+        table.datagrid td {
+            padding: 13px 16px;
+            border-bottom: 1px solid #f0ebe0;
+            font-size: 15px;
+            color: #333;
+        }
         table.datagrid tr:last-child td { border-bottom: none; }
-        table.datagrid tr:hover td { background: #faf7f2; }
+        table.datagrid tr:hover td { background: #fdfaf6; }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="page-header">
-        <div class="page-header-left">
+        <div>
             <h2>Occupancy Report</h2>
             <p>Top 3 theatres by seat occupancy % for any movie (paid tickets only)</p>
         </div>
-        <span class="page-badge">COMPLEX REPORT</span>
+        <span class="page-badge">Complex Report</span>
     </div>
 
     <!-- Filter -->
@@ -210,7 +334,7 @@
                 <h4><asp:Label ID="lblName3" runat="server"/></h4>
                 <div class="podium-city">📍 <asp:Label ID="lblCity3" runat="server"/></div>
                 <div class="occupancy-bar-wrap">
-                    <div class="occupancy-bar" style="width:0%; background: linear-gradient(90deg,#cd7c2f,#e8a060)">
+                    <div class="occupancy-bar" style="width:0%; background: linear-gradient(90deg,#c2783a,#e8a060)">
                         <asp:HiddenField ID="hfPct3" runat="server"/>
                     </div>
                 </div>
@@ -233,7 +357,7 @@
     <div class="table-card">
         <div class="table-card-header">
             <h3>Full Occupancy Breakdown</h3>
-            <asp:Label ID="lblResultCount" runat="server" style="font-size:12px;color:#aaa;"/>
+            <asp:Label ID="lblResultCount" runat="server" style="font-size:13px;color:#aaa;"/>
         </div>
         <div class="grid-scroll">
             <asp:GridView ID="gvOccupancy" runat="server"

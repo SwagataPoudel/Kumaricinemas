@@ -2,178 +2,190 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500&display=swap');
-
         .page-header {
             display: flex;
-            align-items: flex-end;
+            align-items: flex-start;
             justify-content: space-between;
-            margin-bottom: 32px;
-            padding-bottom: 24px;
-            border-bottom: 2px solid #1a1a1a;
+            margin-bottom: 24px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #e5e0d8;
         }
-        .page-header-left h2 {
-            font-family: 'Syne', sans-serif;
-            font-size: 52px;
-            font-weight: 800;
-            line-height: 1;
-            letter-spacing: -2px;
-            color: #1a1a1a;
+        .page-header h2 {
+            font-size: 36px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: #1c1c1c;
         }
-        .page-header-left p { color: #888; font-size: 13px; margin-top: 6px; }
+        .page-header p {
+            color: #888;
+            font-size: 15px;
+            margin-top: 5px;
+        }
         .page-badge {
-            background: #1a1a1a;
-            color: #f5f0e8;
-            padding: 8px 18px;
-            border-radius: 100px;
-            font-size: 12px;
+            background: #f2ede6;
+            color: #b07d3a;
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
             font-weight: 500;
-            letter-spacing: 1px;
+            letter-spacing: 0.4px;
         }
 
-        .layout { display: grid; grid-template-columns: 360px 1fr; gap: 24px; align-items: start; }
+        .layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 20px;
+            align-items: start;
+        }
 
         .form-card {
-            background: #1a1a1a;
-            border-radius: 20px;
-            padding: 28px;
-            color: #f5f0e8;
+            background: #ffffff;
+            border: 1px solid #e8e4de;
+            border-radius: 12px;
+            padding: 24px;
             position: sticky;
-            top: 88px;
+            top: 72px;
         }
         .form-card h3 {
-            font-family: 'Syne', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #b07d3a;
             text-transform: uppercase;
-            color: #c8a96e;
-            margin-bottom: 24px;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
         }
+
         .field { margin-bottom: 16px; }
         .field label {
             display: block;
-            font-size: 10px;
-            letter-spacing: 2px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.7px;
             text-transform: uppercase;
-            color: #666;
+            color: #999;
             margin-bottom: 6px;
         }
         .field input {
             width: 100%;
-            background: #111;
-            border: 1px solid #2a2a2a;
-            border-radius: 10px;
-            padding: 11px 14px;
-            color: #f5f0e8;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            transition: border-color 0.2s;
+            background: #fafaf8;
+            border: 1px solid #e8e4de;
+            border-radius: 7px;
+            padding: 10px 13px;
+            color: #1c1c1c;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            transition: border-color 0.15s;
         }
-        .field input:focus { outline: none; border-color: #c8a96e; }
-        .field input[readonly] { color: #444; cursor: not-allowed; }
+        .field input:focus { outline: none; border-color: #b07d3a; }
+        .field input[readonly] { color: #bbb; cursor: not-allowed; background: #f5f5f3; }
 
-        .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 22px; }
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 20px;
+        }
         .btn {
-            padding: 11px;
-            border: none;
-            border-radius: 10px;
-            font-family: 'Inter', sans-serif;
-            font-size: 13px;
+            padding: 10px;
+            border: 1px solid #e8e4de;
+            border-radius: 7px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.15s;
             text-align: center;
+            background: #fafaf8;
+            color: #555;
         }
-        .btn:hover { opacity: 0.85; transform: translateY(-1px); }
-        .btn-add { background: #c8a96e; color: #1a1a1a; grid-column: span 2; }
-        .btn-update { background: #2a3a5a; color: #7eb3ff; }
-        .btn-delete { background: #3a1a1a; color: #ff7e7e; }
-        .btn-clear {background: #2a3a5a; color: #7eb3ff; grid-column: span 2; border: 1px solid #2a2a2a; }
+        .btn:hover { background: #f2ede6; border-color: #d4c9b8; color: #1c1c1c; }
+        .btn-add {
+            background: #b07d3a;
+            color: #fff;
+            border-color: #b07d3a;
+            grid-column: span 2;
+            font-size: 15px;
+        }
+        .btn-add:hover { background: #9a6c30; border-color: #9a6c30; }
+        .btn-delete { color: #c0392b; border-color: #f0d5d3; background: #fdf5f5; }
+        .btn-delete:hover { background: #fbeae9; border-color: #e8b4b0; }
+        .btn-clear { grid-column: span 2; }
 
         .msg-box {
             margin-top: 14px;
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: 12px;
-            background: #111;
-            border: 1px solid #2a2a2a;
-            min-height: 36px;
+            padding: 10px 12px;
+            border-radius: 7px;
+            font-size: 13px;
+            background: #fafaf8;
+            border: 1px solid #e8e4de;
+            min-height: 38px;
+            color: #666;
         }
 
-        /* Table */
         .table-card {
-            background: white;
-            border-radius: 20px;
+            background: #ffffff;
+            border-radius: 12px;
             overflow: hidden;
-            border: 1px solid #e8e0d0;
+            border: 1px solid #e8e4de;
         }
         .table-card-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid #e8e0d0;
+            padding: 18px 22px;
+            border-bottom: 1px solid #e8e4de;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
         .table-card-header h3 {
-            font-family: 'Syne', sans-serif;
             font-size: 16px;
-            font-weight: 700;
-            color: #1a1a1a;
+            font-weight: 500;
+            color: #1c1c1c;
         }
-        .table-card-header span { font-size: 12px; color: #aaa; }
+        .table-card-header span { font-size: 13px; color: #aaa; }
 
         .grid-scroll { overflow-x: auto; }
         table.datagrid { width: 100%; border-collapse: collapse; }
         table.datagrid th {
-            background: #faf7f2;
-            padding: 12px 16px;
+            background: #fafaf8;
+            padding: 11px 16px;
             text-align: left;
-            font-size: 10px;
-            font-weight: 600;
+            font-size: 11px;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #888;
-            border-bottom: 1px solid #e8e0d0;
+            letter-spacing: 0.8px;
+            color: #999;
+            border-bottom: 1px solid #e8e4de;
         }
         table.datagrid td {
             padding: 13px 16px;
             border-bottom: 1px solid #f0ebe0;
-            font-size: 13px;
+            font-size: 15px;
             color: #333;
         }
         table.datagrid tr:last-child td { border-bottom: none; }
-        table.datagrid tr:hover td { background: #faf7f2; }
+        table.datagrid tr:hover td { background: #fdfaf6; }
         table.datagrid a {
-            color: #c8a96e;
-            font-size: 12px;
+            color: #b07d3a;
+            font-size: 13px;
             font-weight: 500;
             text-decoration: none;
             padding: 4px 10px;
-            background: #faf0e0;
-            border-radius: 6px;
+            background: #f2ede6;
+            border-radius: 5px;
         }
-        table.datagrid a:hover { background: #c8a96e; color: white; }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-10px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        .form-card { animation: slideIn 0.3s ease; }
+        table.datagrid a:hover { background: #b07d3a; color: #fff; }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="page-header">
-        <div class="page-header-left">
+        <div>
             <h2>Customers</h2>
             <p>Manage registered customer records</p>
         </div>
-        <span class="page-badge">CUSTOMER MANAGEMENT</span>
+        <span class="page-badge">Customer Management</span>
     </div>
 
     <div class="layout">
-        <!-- Form -->
         <div class="form-card">
             <h3>Customer Info</h3>
 
@@ -202,7 +214,6 @@
             </div>
         </div>
 
-        <!-- Table -->
         <div class="table-card">
             <div class="table-card-header">
                 <h3>All Customers</h3>

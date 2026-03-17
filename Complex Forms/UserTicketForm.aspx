@@ -2,131 +2,225 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500&display=swap');
-
         .page-header {
-            display: flex; align-items: flex-end; justify-content: space-between;
-            margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid #1a1a1a;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #e5e0d8;
         }
-        .page-header-left h2 {
-            font-family: 'Syne', sans-serif; font-size: 52px; font-weight: 800;
-            line-height: 1; letter-spacing: -2px; color: #1a1a1a;
+        .page-header h2 {
+            font-size: 36px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: #1c1c1c;
         }
-        .page-header-left p { color: #888; font-size: 13px; margin-top: 6px; }
+        .page-header p {
+            color: #888;
+            font-size: 15px;
+            margin-top: 5px;
+        }
         .page-badge {
-            background: #1a1a1a; color: #f5f0e8; padding: 8px 18px;
-            border-radius: 100px; font-size: 12px; font-weight: 500; letter-spacing: 1px;
+            background: #f2ede6;
+            color: #b07d3a;
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.4px;
         }
 
+        /* Filter */
         .filter-card {
-            background: #1a1a1a; border-radius: 20px; padding: 28px;
-            color: #f5f0e8; margin-bottom: 24px;
+            background: #ffffff;
+            border: 1px solid #e8e4de;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
         }
         .filter-card h3 {
-            font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700;
-            letter-spacing: 1px; text-transform: uppercase; color: #c8a96e; margin-bottom: 20px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #b07d3a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
         }
-        .filter-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 16px; align-items: end; }
-        .field { }
+        .filter-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 16px;
+            align-items: end;
+        }
         .field label {
-            display: block; font-size: 10px; letter-spacing: 2px;
-            text-transform: uppercase; color: #666; margin-bottom: 6px;
+            display: block;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 6px;
         }
         .field select, .field input {
-            width: 100%; background: #111; border: 1px solid #2a2a2a;
-            border-radius: 10px; padding: 11px 14px; color: #f5f0e8;
-            font-family: 'Inter', sans-serif; font-size: 14px; transition: border-color 0.2s;
+            width: 100%;
+            background: #fafaf8;
+            border: 1px solid #e8e4de;
+            border-radius: 7px;
+            padding: 10px 13px;
+            color: #1c1c1c;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            transition: border-color 0.15s;
+            appearance: auto;
         }
-        .field select:focus, .field input:focus { outline: none; border-color: #c8a96e; }
-        .field select option { background: #1a1a1a; }
+        .field select:focus, .field input:focus { outline: none; border-color: #b07d3a; }
         .btn-search {
-            background: #c8a96e; color: #1a1a1a; border: none;
-            border-radius: 10px; padding: 11px 28px; font-family: 'Inter', sans-serif;
-            font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+            background: #b07d3a;
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            padding: 10px 24px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.15s;
             white-space: nowrap;
         }
-        .btn-search:hover { opacity: 0.85; transform: translateY(-1px); }
+        .btn-search:hover { background: #9a6c30; }
 
-        /* Customer Info Card */
+        /* Customer Info */
         .customer-info {
-            background: white; border: 1px solid #e8e0d0;
-            border-radius: 16px; padding: 24px; margin-bottom: 24px;
+            background: #ffffff;
+            border: 1px solid #e8e4de;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
             display: none;
         }
         .customer-info.visible { display: block; }
         .customer-info h3 {
-            font-family: 'Syne', sans-serif; font-size: 18px;
-            font-weight: 800; color: #1a1a1a; margin-bottom: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1c1c1c;
+            margin-bottom: 16px;
+            letter-spacing: -0.2px;
         }
-        .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
         .info-item label {
-            display: block; font-size: 10px; letter-spacing: 2px;
-            text-transform: uppercase; color: #aaa; margin-bottom: 4px;
+            display: block;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 4px;
         }
-        .info-item span { font-size: 15px; font-weight: 500; color: #1a1a1a; }
+        .info-item span {
+            font-size: 15px;
+            font-weight: 500;
+            color: #1c1c1c;
+        }
 
-        /* Summary Stats */
+        /* Stats */
         .stats-row {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            gap: 16px; margin-bottom: 24px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
         }
         .stat-box {
-            background: white; border: 1px solid #e8e0d0;
-            border-radius: 16px; padding: 20px; text-align: center;
+            background: #ffffff;
+            border: 1px solid #e8e4de;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
         }
         .stat-box .num {
-            font-family: 'Syne', sans-serif; font-size: 36px;
-            font-weight: 800; color: #1a1a1a; line-height: 1;
+            font-size: 34px;
+            font-weight: 700;
+            color: #1c1c1c;
+            line-height: 1;
+            letter-spacing: -1px;
         }
         .stat-box .lbl {
-            font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-            color: #aaa; margin-top: 6px;
+            font-size: 11px;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-top: 6px;
         }
-        .stat-box .num.gold { color: #c8a96e; }
+        .stat-box .num.gold  { color: #b07d3a; }
         .stat-box .num.green { color: #22c55e; }
-        .stat-box .num.red { color: #ef4444; }
+        .stat-box .num.red   { color: #ef4444; }
 
         /* Table */
-        .table-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #e8e0d0; }
-        .table-card-header {
-            padding: 20px 24px; border-bottom: 1px solid #e8e0d0;
-            display: flex; align-items: center; justify-content: space-between;
+        .table-card {
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e8e4de;
         }
-        .table-card-header h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: #1a1a1a; }
-        .table-card-header span { font-size: 12px; color: #aaa; }
+        .table-card-header {
+            padding: 18px 22px;
+            border-bottom: 1px solid #e8e4de;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .table-card-header h3 {
+            font-size: 16px;
+            font-weight: 500;
+            color: #1c1c1c;
+        }
+        .table-card-header span { font-size: 13px; color: #aaa; }
         .grid-scroll { overflow-x: auto; }
         table.datagrid { width: 100%; border-collapse: collapse; }
         table.datagrid th {
-            background: #faf7f2; padding: 12px 16px; text-align: left;
-            font-size: 10px; font-weight: 600; text-transform: uppercase;
-            letter-spacing: 1.5px; color: #888; border-bottom: 1px solid #e8e0d0;
+            background: #fafaf8;
+            padding: 11px 16px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #999;
+            border-bottom: 1px solid #e8e4de;
         }
-        table.datagrid td { padding: 13px 16px; border-bottom: 1px solid #f0ebe0; font-size: 13px; color: #333; }
+        table.datagrid td {
+            padding: 13px 16px;
+            border-bottom: 1px solid #f0ebe0;
+            font-size: 15px;
+            color: #333;
+        }
         table.datagrid tr:last-child td { border-bottom: none; }
-        table.datagrid tr:hover td { background: #faf7f2; }
-        .badge {
-            display: inline-block; padding: 3px 10px; border-radius: 100px;
-            font-size: 11px; font-weight: 600;
-        }
-        .badge-paid { background: #dcfce7; color: #16a34a; }
-        .badge-booked { background: #fef9c3; color: #ca8a04; }
-        .badge-cancelled { background: #fee2e2; color: #dc2626; }
+        table.datagrid tr:hover td { background: #fdfaf6; }
 
-        .no-results {
-            text-align: center; padding: 60px; color: #aaa;
-            font-size: 14px;
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
         }
-        .no-results span { font-size: 40px; display: block; margin-bottom: 12px; }
+        .badge-paid      { background: #dcfce7; color: #16a34a; }
+        .badge-booked    { background: #fef9c3; color: #ca8a04; }
+        .badge-cancelled { background: #fee2e2; color: #dc2626; }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="page-header">
-        <div class="page-header-left">
+        <div>
             <h2>User Ticket Report</h2>
             <p>View ticket history for any customer over the last 6 months</p>
         </div>
-        <span class="page-badge">COMPLEX REPORT</span>
+        <span class="page-badge">Complex Report</span>
     </div>
 
     <!-- Filter -->
@@ -196,7 +290,7 @@
     <div class="table-card">
         <div class="table-card-header">
             <h3>Ticket Details</h3>
-            <asp:Label ID="lblResultCount" runat="server" style="font-size:12px;color:#aaa;"/>
+            <asp:Label ID="lblResultCount" runat="server" style="font-size:13px;color:#aaa;"/>
         </div>
         <div class="grid-scroll">
             <asp:GridView ID="gvTickets" runat="server"

@@ -6,46 +6,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - Kumari Cinemas</title>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server"/>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500&display=swap');
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #f5f0e8; color: #1a1a1a; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #f7f5f1;
+            color: #1c1c1c;
+            font-size: 20px;
+        }
 
         .navbar {
-            background: #1a1a1a;
-            padding: 0 40px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e0d8;
+            padding: 0 48px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 64px;
+            height: 56px;
             position: sticky;
             top: 0;
             z-index: 100;
         }
+
         .navbar-brand {
-            font-family: 'Syne', sans-serif;
-            font-size: 20px;
-            font-weight: 800;
-            color: #f5f0e8;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1c1c1c;
             text-decoration: none;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.2px;
+            flex-shrink: 0;
         }
-        .navbar-brand span { color: #c8a96e; }
-        .nav-links { display: flex; list-style: none; gap: 2px; }
-        .nav-links a {
-            color: #888;
+        .navbar-brand span { color: #a06b28; }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 4px;
+            align-items: center;
+        }
+        .nav-links li a {
+            display: block;
+            color: #666;
             text-decoration: none;
-            padding: 7px 14px;
+            padding: 6px 12px;
             border-radius: 6px;
-            font-size: 13px;
+            font-size: 18px;
             font-weight: 400;
-            transition: all 0.2s;
-            letter-spacing: 0.3px;
+            white-space: nowrap;
+            transition: background 0.15s, color 0.15s;
         }
-        .nav-links a:hover { background: #2a2a2a; color: #f5f0e8; }
-        .nav-links a.active { background: #c8a96e; color: #1a1a1a; font-weight: 500; }
-        .page-content { padding: 36px 40px; min-height: calc(100vh - 64px); }
+        .nav-links li a:hover {
+            background: #f2ece3;
+            color: #1c1c1c;
+        }
+        .nav-links li a.active {
+            background: #f2ece3;
+            color: #a06b28;
+            font-weight: 500;
+        }
+
+        .page-content {
+    padding: 32px 48px;
+    min-height: calc(100vh - 56px);
+}
     </style>
 </head>
 <body>
@@ -67,15 +92,14 @@
         </asp:ScriptManager>
 
         <nav class="navbar">
-            <a class="navbar-brand" href="/Default.aspx">
-                Kumari<span>Cinemas</span>
-            </a>
+            <a class="navbar-brand" href="/Default.aspx">Kumari<span>Cinemas</span></a>
             <ul class="nav-links">
                 <li><a href="/Basic Forms/MovieForm.aspx">Movies</a></li>
                 <li><a href="/Basic Forms/CustomerForm.aspx">Customers</a></li>
                 <li><a href="/Basic Forms/TheatreCityHallForm.aspx">Theatre & Hall</a></li>
                 <li><a href="/Basic Forms/ShowTimesForm.aspx">Showtimes</a></li>
                 <li><a href="/Basic Forms/TicketForm.aspx">Tickets</a></li>
+                <li><a href="/Complex Forms/OccupancyReportForm.aspx">Occupancy Report</a></li>
             </ul>
         </nav>
 
