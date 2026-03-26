@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Theatre & Hall" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="TheatreCityHallForm.aspx.cs" Inherits="KumariCinemas.TheatreCityHall" %>
+﻿<%@ Page Title="Hall" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="TheatreCityHallForm.aspx.cs" Inherits="KumariCinemas.TheatreCityHall" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
@@ -30,19 +30,12 @@
             font-weight: 500;
             letter-spacing: 0.4px;
         }
-
-        .two-col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
         .form-card {
             background: #ffffff;
             border: 1px solid #e8e4de;
             border-radius: 12px;
             padding: 24px;
+            margin-bottom: 20px;
         }
         .form-card h3 {
             font-size: 11px;
@@ -52,7 +45,6 @@
             letter-spacing: 1px;
             margin-bottom: 20px;
         }
-
         .field { margin-bottom: 16px; }
         .field label {
             display: block;
@@ -77,7 +69,6 @@
         .field input:focus, .field select:focus { outline: none; border-color: #b07d3a; }
         .field input[readonly] { color: #bbb; cursor: not-allowed; background: #f5f5f3; }
         .field select { appearance: auto; }
-
         .btn-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -109,7 +100,6 @@
         .btn-delete { color: #c0392b; border-color: #f0d5d3; background: #fdf5f5; }
         .btn-delete:hover { background: #fbeae9; border-color: #e8b4b0; }
         .btn-clear { grid-column: span 2; }
-
         .msg-box {
             margin-top: 14px;
             padding: 10px 12px;
@@ -120,7 +110,6 @@
             min-height: 38px;
             color: #666;
         }
-
         .table-card {
             background: #ffffff;
             border-radius: 12px;
@@ -140,7 +129,6 @@
             color: #1c1c1c;
         }
         .table-card-header span { font-size: 13px; color: #aaa; }
-
         .grid-scroll { overflow-x: auto; }
         table.datagrid { width: 100%; border-collapse: collapse; }
         table.datagrid th {
@@ -178,71 +166,43 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="page-header">
         <div>
-            <h2>Theatre & Hall</h2>
-            <p>Manage theatres, cities and halls</p>
+            <h2>Hall</h2>
+            <p>Manage halls</p>
         </div>
-        <span class="page-badge">Theatre Management</span>
+        <span class="page-badge">Hall Management</span>
     </div>
 
-    <div class="two-col">
-        <!-- Theatre Form -->
-        <div class="form-card">
-            <h3>Theatre Info</h3>
-            <div class="field">
-                <label>Theatre ID</label>
-                <asp:TextBox ID="txtTheatreID" runat="server" ReadOnly="true" placeholder="Auto-generated"/>
-            </div>
-            <div class="field">
-                <label>Theatre Name</label>
-                <asp:TextBox ID="txtTheatreName" runat="server" placeholder="Enter name"/>
-            </div>
-            <div class="field">
-                <label>Theatre City</label>
-                <asp:TextBox ID="txtTheatreCity" runat="server" placeholder="Enter city"/>
-            </div>
-            <div class="btn-group">
-                <asp:Button ID="btnAddTheatre" runat="server" Text="+ Add Theatre" CssClass="btn btn-add" OnClick="btnAddTheatre_Click"/>
-                <asp:Button ID="btnUpdateTheatre" runat="server" Text="Update" CssClass="btn btn-update" OnClick="btnUpdateTheatre_Click"/>
-                <asp:Button ID="btnDeleteTheatre" runat="server" Text="Delete" CssClass="btn btn-delete" OnClick="btnDeleteTheatre_Click"/>
-                <asp:Button ID="btnClearTheatre" runat="server" Text="Clear" CssClass="btn btn-clear" OnClick="btnClearTheatre_Click"/>
-            </div>
-            <div class="msg-box"><asp:Label ID="lblTheatreMsg" runat="server"/></div>
+    <div class="form-card">
+        <h3>Hall Info</h3>
+        <div class="field">
+            <label>Hall ID</label>
+            <asp:TextBox ID="txtHallID" runat="server" placeholder="Enter Hall ID"/>
         </div>
-
-        <!-- Hall Form -->
-        <div class="form-card">
-            <h3>Hall Info</h3>
-            <div class="field">
-                <label>Hall ID</label>
-                <asp:TextBox ID="txtHallID" runat="server" ReadOnly="true" placeholder="Auto-generated"/>
-            </div>
-            <div class="field">
-                <label>Hall Name</label>
-                <asp:TextBox ID="txtHallName" runat="server" placeholder="Enter hall name"/>
-            </div>
-            <div class="field">
-                <label>Hall Capacity</label>
-                <asp:TextBox ID="txtHallCapacity" runat="server" placeholder="Enter capacity"/>
-            </div>
-            <div class="field">
-                <label>Theatre</label>
-                <asp:DropDownList ID="ddlTheatre" runat="server"
-                    DataTextField="THEATREINFO" DataValueField="THEATREID"/>
-            </div>
-            <div class="btn-group">
-                <asp:Button ID="btnAddHall" runat="server" Text="+ Add Hall" CssClass="btn btn-add" OnClick="btnAddHall_Click"/>
-                <asp:Button ID="btnUpdateHall" runat="server" Text="Update" CssClass="btn btn-update" OnClick="btnUpdateHall_Click"/>
-                <asp:Button ID="btnDeleteHall" runat="server" Text="Delete" CssClass="btn btn-delete" OnClick="btnDeleteHall_Click"/>
-                <asp:Button ID="btnClearHall" runat="server" Text="Clear" CssClass="btn btn-clear" OnClick="btnClearHall_Click"/>
-            </div>
-            <div class="msg-box"><asp:Label ID="lblHallMsg" runat="server"/></div>
+        <div class="field">
+            <label>Hall Name</label>
+            <asp:TextBox ID="txtHallName" runat="server" placeholder="Enter hall name"/>
         </div>
+        <div class="field">
+            <label>Hall Capacity</label>
+            <asp:TextBox ID="txtHallCapacity" runat="server" placeholder="Enter capacity"/>
+        </div>
+        <div class="field">
+            <label>Theatre</label>
+            <asp:DropDownList ID="ddlTheatre" runat="server"
+                DataTextField="THEATREINFO" DataValueField="THEATREID"/>
+        </div>
+        <div class="btn-group">
+            <asp:Button ID="btnAddHall" runat="server" Text="+ Add Hall" CssClass="btn btn-add" OnClick="btnAddHall_Click"/>
+            <asp:Button ID="btnUpdateHall" runat="server" Text="Update" CssClass="btn btn-update" OnClick="btnUpdateHall_Click"/>
+            <asp:Button ID="btnDeleteHall" runat="server" Text="Delete" CssClass="btn btn-delete" OnClick="btnDeleteHall_Click"/>
+            <asp:Button ID="btnClearHall" runat="server" Text="Clear" CssClass="btn btn-clear" OnClick="btnClearHall_Click"/>
+        </div>
+        <div class="msg-box"><asp:Label ID="lblHallMsg" runat="server"/></div>
     </div>
 
-    <!-- Combined Grid -->
     <div class="table-card">
         <div class="table-card-header">
-            <h3>All Theatres & Halls</h3>
+            <h3>All Halls</h3>
             <span>Click a row to select</span>
         </div>
         <div class="grid-scroll">
@@ -252,12 +212,11 @@
                 DataKeyNames="HALLID" CssClass="datagrid" GridLines="None">
                 <Columns>
                     <asp:CommandField ShowSelectButton="True" SelectText="Select"/>
-                    <asp:BoundField DataField="THEATREID" HeaderText="Theatre ID"/>
-                    <asp:BoundField DataField="THEATRENAME" HeaderText="Theatre Name"/>
-                    <asp:BoundField DataField="THEATRECITY" HeaderText="City"/>
                     <asp:BoundField DataField="HALLID" HeaderText="Hall ID"/>
                     <asp:BoundField DataField="HALLNAME" HeaderText="Hall Name"/>
                     <asp:BoundField DataField="HALLCAPACITY" HeaderText="Capacity"/>
+                    <asp:BoundField DataField="THEATRENAME" HeaderText="Theatre"/>
+                    <asp:BoundField DataField="THEATRECITY" HeaderText="City"/>
                 </Columns>
             </asp:GridView>
         </div>

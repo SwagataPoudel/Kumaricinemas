@@ -192,17 +192,21 @@
 
             <div class="field">
                 <label>Ticket ID</label>
-                <asp:TextBox ID="txtTicketID" runat="server" ReadOnly="true" placeholder="Auto-generated"/>
+                <asp:TextBox ID="txtTicketID" runat="server" placeholder="Enter Ticket ID"/>
             </div>
-            <div class="field">
-                <label>Customer</label>
-                <asp:DropDownList ID="ddlCustomer" runat="server" DataTextField="CUSTOMERINFO" DataValueField="CUSTOMERID"/>
-            </div>
-            <div class="field">
-                <label>Show</label>
-                <asp:DropDownList ID="ddlShow" runat="server" DataTextField="SHOWINFO" DataValueField="SHOWID"
-                    AutoPostBack="true" OnSelectedIndexChanged="ddlShow_SelectedIndexChanged"/>
-            </div>
+           <div class="field">
+    <label>Customer</label>
+    <asp:DropDownList ID="ddlCustomer" runat="server" 
+        DataTextField="CUSTOMERINFO" DataValueField="CUSTOMERID"
+        AppendDataBoundItems="True"/>
+</div>
+<div class="field">
+    <label>Show</label>
+    <asp:DropDownList ID="ddlShow" runat="server" 
+        DataTextField="SHOWINFO" DataValueField="SHOWID"
+        AppendDataBoundItems="True"
+        AutoPostBack="true" OnSelectedIndexChanged="ddlShow_SelectedIndexChanged"/>
+</div>
             <div class="field">
                 <label>Ticket Price (Rs.) — Auto-filled from Show</label>
                 <asp:TextBox ID="txtTicketPrice" runat="server" ReadOnly="true" placeholder="Auto-filled from show"/>

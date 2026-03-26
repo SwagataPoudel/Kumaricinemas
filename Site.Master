@@ -94,12 +94,15 @@
         <nav class="navbar">
             <a class="navbar-brand" href="/Default.aspx">Kumari<span>Cinemas</span></a>
             <ul class="nav-links">
+                <li><a href="/Home/Home.aspx">Home</a></li>
                 <li><a href="/Basic Forms/MovieForm.aspx">Movies</a></li>
                 <li><a href="/Basic Forms/CustomerForm.aspx">Customers</a></li>
-                <li><a href="/Basic Forms/TheatreCityHallForm.aspx">Theatre & Hall</a></li>
+                <li><a href="/Basic Forms/TheatreCityHallForm.aspx">Hall</a></li>
                 <li><a href="/Basic Forms/ShowTimesForm.aspx">Showtimes</a></li>
                 <li><a href="/Basic Forms/TicketForm.aspx">Tickets</a></li>
                 <li><a href="/Complex Forms/OccupancyReportForm.aspx">Occupancy Report</a></li>
+                  <li><a href="/Complex Forms/UserTicketForm.aspx">User Ticket</a></li>
+                  <li><a href="/Complex Forms/TheatreMovieForm.aspx">Theatre Movie</a></li>
             </ul>
         </nav>
 

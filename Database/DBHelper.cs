@@ -29,10 +29,4 @@ public class DBHelper
             cmd.ExecuteNonQuery();
         }
     }
-
-    public static int GetNextID(string sequenceName)
-    {
-        DataTable dt = GetData($"SELECT {sequenceName}.NEXTVAL FROM DUAL");
-        return Convert.ToInt32(dt.Rows[0][0]);
-    }
 }

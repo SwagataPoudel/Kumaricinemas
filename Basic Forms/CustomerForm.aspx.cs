@@ -31,12 +31,17 @@ namespace KumariCinemas
         {
             try
             {
-                int newID = DBHelper.GetNextID("seq_customer");
-                txtCustomerID.Text = newID.ToString();
+                if (string.IsNullOrWhiteSpace(txtCustomerID.Text))
+                {
+                    lblMessage.Text = "✗ Please enter a Customer ID";
+                    lblMessage.ForeColor = System.Drawing.Color.FromArgb(255, 126, 126);
+                    return;
+                }
+
                 string query = $@"INSERT INTO Customer (CustomerID, CustomerName, Address) 
-                                  VALUES ({newID}, '{txtCustomerName.Text}', '{txtAddress.Text}')";
+                                  VALUES ({txtCustomerID.Text}, '{txtCustomerName.Text}', '{txtAddress.Text}')";
                 DBHelper.ExecuteQuery(query);
-                lblMessage.Text = $"✓ Customer added — ID: {newID}";
+                lblMessage.Text = $"✓ Customer added — ID: {txtCustomerID.Text}";
                 lblMessage.ForeColor = System.Drawing.Color.FromArgb(200, 169, 110);
                 LoadCustomers();
             }

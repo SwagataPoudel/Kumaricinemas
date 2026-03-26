@@ -30,14 +30,12 @@
             font-weight: 500;
             letter-spacing: 0.4px;
         }
-
         .layout {
             display: grid;
             grid-template-columns: 320px 1fr;
             gap: 20px;
             align-items: start;
         }
-
         .form-card {
             background: #ffffff;
             border: 1px solid #e8e4de;
@@ -54,7 +52,6 @@
             letter-spacing: 1px;
             margin-bottom: 20px;
         }
-
         .field { margin-bottom: 16px; }
         .field label {
             display: block;
@@ -79,7 +76,6 @@
         .field input:focus, .field select:focus { outline: none; border-color: #b07d3a; }
         .field input[readonly] { color: #bbb; cursor: not-allowed; background: #f5f5f3; }
         .field select { appearance: auto; }
-
         .price-hint {
             background: #fafaf8;
             border: 1px solid #e8e4de;
@@ -93,7 +89,6 @@
         .price-hint .tag-gold  { color: #b07d3a; font-weight: 500; }
         .price-hint .tag-blue  { color: #4a7ab5; font-weight: 500; }
         .price-hint .tag-muted { color: #aaa; }
-
         .btn-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -125,7 +120,6 @@
         .btn-delete { color: #c0392b; border-color: #f0d5d3; background: #fdf5f5; }
         .btn-delete:hover { background: #fbeae9; border-color: #e8b4b0; }
         .btn-clear { grid-column: span 2; }
-
         .msg-box {
             margin-top: 14px;
             padding: 10px 12px;
@@ -136,7 +130,6 @@
             min-height: 38px;
             color: #666;
         }
-
         .table-card {
             background: #ffffff;
             border-radius: 12px;
@@ -156,7 +149,6 @@
             color: #1c1c1c;
         }
         .table-card-header span { font-size: 13px; color: #aaa; }
-
         .grid-scroll { overflow-x: auto; }
         table.datagrid { width: 100%; border-collapse: collapse; }
         table.datagrid th {
@@ -203,10 +195,9 @@
     <div class="layout">
         <div class="form-card">
             <h3>Show Info</h3>
-
             <div class="field">
                 <label>Show ID</label>
-                <asp:TextBox ID="txtShowID" runat="server" ReadOnly="true" placeholder="Auto-generated"/>
+                <asp:TextBox ID="txtShowID" runat="server" placeholder="Enter Show ID"/>
             </div>
             <div class="field">
                 <label>Show Date</label>
@@ -223,6 +214,13 @@
             <div class="field">
                 <label>Is Release Week</label>
                 <asp:DropDownList ID="ddlIsReleaseWeek" runat="server">
+                    <asp:ListItem Value="Yes">Yes</asp:ListItem>
+                    <asp:ListItem Value="No">No</asp:ListItem>
+                </asp:DropDownList>
+            </div>
+            <div class="field">
+                <label>Is Holiday</label>
+                <asp:DropDownList ID="ddlIsHoliday" runat="server">
                     <asp:ListItem Value="Yes">Yes</asp:ListItem>
                     <asp:ListItem Value="No">No</asp:ListItem>
                 </asp:DropDownList>
@@ -248,6 +246,7 @@
             <div class="price-hint">
                 💡 Final price auto-adjusts:<br/>
                 <span class="tag-gold">Release Week</span> +20% &nbsp;|&nbsp;
+                <span class="tag-gold">Holiday</span> +20% &nbsp;|&nbsp;
                 <span class="tag-blue">Morning</span> -15% &nbsp;|&nbsp;
                 <span class="tag-gold">Evening</span> +10% &nbsp;|&nbsp;
                 <span class="tag-muted">Day</span> no change
@@ -264,7 +263,6 @@
                 <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-delete" OnClick="btnDelete_Click"/>
                 <asp:Button ID="btnClear" runat="server" Text="Clear Fields" CssClass="btn btn-clear" OnClick="btnClear_Click"/>
             </div>
-
             <div class="msg-box">
                 <asp:Label ID="lblMessage" runat="server"/>
             </div>
@@ -291,6 +289,7 @@
                         <asp:BoundField DataField="SHOWTIME" HeaderText="Time"/>
                         <asp:BoundField DataField="BASEPRICE" HeaderText="Final Price (Rs.)"/>
                         <asp:BoundField DataField="ISRELEASEWEEK" HeaderText="Release Week"/>
+                        <asp:BoundField DataField="ISHOLIDAY" HeaderText="Holiday"/>
                     </Columns>
                 </asp:GridView>
             </div>

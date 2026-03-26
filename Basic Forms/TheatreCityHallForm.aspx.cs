@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Web.UI.WebControls;
 
 namespace KumariCinemas
@@ -13,11 +12,11 @@ namespace KumariCinemas
 
         void LoadGrid()
         {
-            string query = @"SELECT t.TheatreID, t.TheatreName, t.TheatreCity,
-                                    h.HallID, h.HallName, h.HallCapacity
-                             FROM Theatre t
-                             JOIN Hall h ON t.TheatreID = h.TheatreId
-                             ORDER BY t.TheatreID";
+            string query = @"SELECT h.HallID, h.HallName, h.HallCapacity,
+                                    t.TheatreName, t.TheatreCity
+                             FROM Hall h
+                             JOIN Theatre t ON h.TheatreId = t.TheatreID
+                             ORDER BY h.HallID";
             gvTheatreCityHall.DataSource = DBHelper.GetData(query);
             gvTheatreCityHall.DataBind();
         }
@@ -29,78 +28,25 @@ namespace KumariCinemas
             ddlTheatre.DataBind();
         }
 
-        void ClearTheatreFields()
-        {
-            txtTheatreID.Text = ""; txtTheatreName.Text = "";
-            txtTheatreCity.Text = ""; lblTheatreMsg.Text = "";
-        }
-
         void ClearHallFields()
         {
             txtHallID.Text = ""; txtHallName.Text = "";
             txtHallCapacity.Text = ""; lblHallMsg.Text = "";
         }
 
-        protected void btnAddTheatre_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int newID = DBHelper.GetNextID("seq_theatre");
-                txtTheatreID.Text = newID.ToString();
-                DBHelper.ExecuteQuery($"INSERT INTO Theatre VALUES ({newID}, '{txtTheatreName.Text}', '{txtTheatreCity.Text}')");
-                lblTheatreMsg.Text = $"✓ Theatre added — ID: {newID}";
-                lblTheatreMsg.ForeColor = System.Drawing.Color.FromArgb(200, 169, 110);
-                LoadGrid(); LoadTheatreDropdown();
-            }
-            catch (Exception ex)
-            {
-                lblTheatreMsg.Text = "✗ " + ex.Message;
-                lblTheatreMsg.ForeColor = System.Drawing.Color.FromArgb(255, 126, 126);
-            }
-        }
-
-        protected void btnUpdateTheatre_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DBHelper.ExecuteQuery($"UPDATE Theatre SET TheatreName='{txtTheatreName.Text}', TheatreCity='{txtTheatreCity.Text}' WHERE TheatreID={txtTheatreID.Text}");
-                lblTheatreMsg.Text = "✓ Theatre updated";
-                lblTheatreMsg.ForeColor = System.Drawing.Color.FromArgb(126, 179, 255);
-                LoadGrid(); LoadTheatreDropdown();
-            }
-            catch (Exception ex)
-            {
-                lblTheatreMsg.Text = "✗ " + ex.Message;
-                lblTheatreMsg.ForeColor = System.Drawing.Color.FromArgb(255, 126, 126);
-            }
-        }
-
-        protected void btnDeleteTheatre_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DBHelper.ExecuteQuery($"DELETE FROM Theatre WHERE TheatreID={txtTheatreID.Text}");
-                lblTheatreMsg.Text = "✓ Theatre deleted";
-                lblTheatreMsg.ForeColor = System.Drawing.Color.FromArgb(255, 126, 126);
-                ClearTheatreFields(); LoadGrid(); LoadTheatreDropdown();
-            }
-            catch (Exception ex)
-            {
-                lblTheatreMsg.Text = "✗ " + ex.Message;
-                lblTheatreMsg.ForeColor = System.Drawing.Color.FromArgb(255, 126, 126);
-            }
-        }
-
-        protected void btnClearTheatre_Click(object sender, EventArgs e) { ClearTheatreFields(); }
-
         protected void btnAddHall_Click(object sender, EventArgs e)
         {
             try
             {
-                int newID = DBHelper.GetNextID("seq_hall");
-                txtHallID.Text = newID.ToString();
-                DBHelper.ExecuteQuery($"INSERT INTO Hall VALUES ({newID}, '{txtHallCapacity.Text}', '{txtHallName.Text}', {ddlTheatre.SelectedValue})");
-                lblHallMsg.Text = $"✓ Hall added — ID: {newID}";
+                if (string.IsNullOrWhiteSpace(txtHallID.Text))
+                {
+                    lblHallMsg.Text = "✗ Please enter a Hall ID";
+                    lblHallMsg.ForeColor = System.Drawing.Color.FromArgb(255, 126, 126);
+                    return;
+                }
+
+                DBHelper.ExecuteQuery($"INSERT INTO Hall VALUES ({txtHallID.Text}, '{txtHallCapacity.Text}', '{txtHallName.Text}', {ddlTheatre.SelectedValue})");
+                lblHallMsg.Text = $"✓ Hall added — ID: {txtHallID.Text}";
                 lblHallMsg.ForeColor = System.Drawing.Color.FromArgb(200, 169, 110);
                 LoadGrid();
             }
@@ -131,6 +77,8 @@ namespace KumariCinemas
         {
             try
             {
+                DBHelper.ExecuteQuery($"DELETE FROM Ticket WHERE ShowID IN (SELECT ShowID FROM Show WHERE HallID={txtHallID.Text})");
+                DBHelper.ExecuteQuery($"DELETE FROM Show WHERE HallID={txtHallID.Text}");
                 DBHelper.ExecuteQuery($"DELETE FROM Hall WHERE HallID={txtHallID.Text}");
                 lblHallMsg.Text = "✓ Hall deleted";
                 lblHallMsg.ForeColor = System.Drawing.Color.FromArgb(255, 126, 126);
@@ -148,15 +96,12 @@ namespace KumariCinemas
         protected void gvTheatreCityHall_SelectedIndexChanged(object sender, EventArgs e)
         {
             GridViewRow row = gvTheatreCityHall.SelectedRow;
-            txtTheatreID.Text = row.Cells[1].Text;
-            txtTheatreName.Text = row.Cells[2].Text;
-            txtTheatreCity.Text = row.Cells[3].Text;
-            txtHallID.Text = row.Cells[4].Text;
-            txtHallName.Text = row.Cells[5].Text;
-            txtHallCapacity.Text = row.Cells[6].Text;
+            txtHallID.Text = row.Cells[1].Text;
+            txtHallName.Text = row.Cells[2].Text;
+            txtHallCapacity.Text = row.Cells[3].Text;
             ddlTheatre.ClearSelection();
-            foreach (System.Web.UI.WebControls.ListItem item in ddlTheatre.Items)
-                if (item.Text.StartsWith(row.Cells[2].Text)) { item.Selected = true; break; }
+            foreach (ListItem item in ddlTheatre.Items)
+                if (item.Text.StartsWith(row.Cells[4].Text)) { item.Selected = true; break; }
         }
     }
 }

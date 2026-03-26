@@ -189,10 +189,10 @@
         <div class="form-card">
             <h3>Customer Info</h3>
 
-            <div class="field">
-                <label>Customer ID</label>
-                <asp:TextBox ID="txtCustomerID" runat="server" ReadOnly="true" placeholder="Auto-generated"/>
-            </div>
+           <div class="field">
+    <label>Customer ID</label>
+    <asp:TextBox ID="txtCustomerID" runat="server" placeholder="Enter customer ID"/>
+</div>
             <div class="field">
                 <label>Full Name</label>
                 <asp:TextBox ID="txtCustomerName" runat="server" placeholder="Enter full name"/>

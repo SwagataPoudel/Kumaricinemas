@@ -32,13 +32,18 @@ namespace KumariCinemas
         {
             try
             {
-                int newID = DBHelper.GetNextID("seq_movie");
-                txtMovieID.Text = newID.ToString();
+                if (string.IsNullOrWhiteSpace(txtMovieID.Text))
+                {
+                    lblMessage.Text = "✗ Please enter a Movie ID";
+                    lblMessage.ForeColor = System.Drawing.Color.FromArgb(255, 126, 126);
+                    return;
+                }
+
                 string query = $@"INSERT INTO Movie (MovieID, MovieTitle, Duration, Language, Genre, ReleaseDate)
-                                  VALUES ({newID}, '{txtMovieTitle.Text}', '{txtDuration.Text}',
+                                  VALUES ({txtMovieID.Text}, '{txtMovieTitle.Text}', '{txtDuration.Text}',
                                   '{txtLanguage.Text}', '{txtGenre.Text}', DATE '{txtReleaseDate.Text}')";
                 DBHelper.ExecuteQuery(query);
-                lblMessage.Text = $"✓ Movie added — ID: {newID}";
+                lblMessage.Text = $"✓ Movie added — ID: {txtMovieID.Text}";
                 lblMessage.ForeColor = System.Drawing.Color.FromArgb(200, 169, 110);
                 LoadMovies();
             }
@@ -73,6 +78,8 @@ namespace KumariCinemas
         {
             try
             {
+                DBHelper.ExecuteQuery($"DELETE FROM Ticket WHERE ShowID IN (SELECT ShowID FROM Show WHERE MovieID={txtMovieID.Text})");
+                DBHelper.ExecuteQuery($"DELETE FROM Show WHERE MovieID={txtMovieID.Text}");
                 DBHelper.ExecuteQuery($"DELETE FROM Movie WHERE MovieID={txtMovieID.Text}");
                 lblMessage.Text = "✓ Movie deleted";
                 lblMessage.ForeColor = System.Drawing.Color.FromArgb(255, 126, 126);

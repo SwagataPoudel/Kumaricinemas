@@ -29,6 +29,9 @@ namespace KumariCinemas
             {
                 pnlCustomerInfo.Visible = false;
                 pnlStats.Visible = false;
+                gvTickets.DataSource = null;
+                gvTickets.DataBind();
+                lblResultCount.Text = "";
                 return;
             }
 
@@ -41,7 +44,6 @@ namespace KumariCinemas
 
             if (dtCustomer.Rows.Count > 0)
             {
-                pnlCustomerInfo.CssClass = "customer-info visible";
                 pnlCustomerInfo.Visible = true;
                 lblCustomerName.Text = dtCustomer.Rows[0]["CUSTOMERNAME"].ToString();
                 lblCustomerID.Text = dtCustomer.Rows[0]["CUSTOMERID"].ToString();
@@ -49,17 +51,17 @@ namespace KumariCinemas
                 lblPeriod.Text = $"Last {months} month(s)";
             }
 
-            // Load tickets
-            string query = $@"SELECT t.TicketID, m.MovieTitle, th.theatreName, th.theatreCity,
+            // Load tickets — compare on TRUNC to ignore time component
+            string query = $@"SELECT t.TicketID, m.MovieTitle, th.TheatreName, th.TheatreCity,
                                       h.HallName, s.ShowDate, s.ShowTime,
                                       t.SeatNumber, t.TicketPrice, t.BookingDate, t.Bookingstatus
                                FROM Ticket t
-                               JOIN Show s ON t.ShowID = s.ShowID
+                               JOIN Show s  ON t.ShowID  = s.ShowID
                                JOIN Movie m ON s.MovieID = m.MovieID
-                               JOIN Hall h ON s.HallID = h.HallID
-                               JOIN Theatre th ON h.theatreId = th.theatreID
+                               JOIN Hall h  ON s.HallID  = h.HallID
+                               JOIN Theatre th ON h.TheatreId = th.TheatreID
                                WHERE t.CustomerID = {customerID}
-                               AND t.BookingDate >= ADD_MONTHS(SYSDATE, -{months})
+                               AND TRUNC(t.BookingDate) >= TRUNC(ADD_MONTHS(SYSDATE, -{months}))
                                ORDER BY t.BookingDate DESC";
 
             DataTable dtTickets = DBHelper.GetData(query);
@@ -68,20 +70,36 @@ namespace KumariCinemas
 
             // Stats
             pnlStats.Visible = true;
-            lblTotalTickets.Text = dtTickets.Rows.Count.ToString();
-
             int paid = 0, booked = 0, cancelled = 0;
+            decimal totalSpent = 0;
+
             foreach (DataRow row in dtTickets.Rows)
             {
                 string status = row["BOOKINGSTATUS"].ToString().ToLower();
                 if (status == "paid") paid++;
                 else if (status == "booked") booked++;
                 else if (status == "cancelled") cancelled++;
+
+                decimal.TryParse(row["TICKETPRICE"].ToString(), out decimal price);
+                totalSpent += price;
             }
+
+            lblTotalTickets.Text = dtTickets.Rows.Count.ToString();
             lblPaidTickets.Text = paid.ToString();
             lblBookedTickets.Text = booked.ToString();
             lblCancelledTickets.Text = cancelled.ToString();
             lblResultCount.Text = $"{dtTickets.Rows.Count} record(s) found";
+
+            // If still 0 results, check if customer has ANY tickets at all
+            if (dtTickets.Rows.Count == 0)
+            {
+                DataTable dtCheck = DBHelper.GetData(
+                    $"SELECT COUNT(*) AS CNT FROM Ticket WHERE CustomerID = {customerID}");
+                int total = int.Parse(dtCheck.Rows[0]["CNT"].ToString());
+                lblResultCount.Text = total == 0
+                    ? "This customer has no tickets at all."
+                    : $"No tickets in the last {months} month(s). Customer has {total} ticket(s) outside this period — try a longer period.";
+            }
         }
     }
 }

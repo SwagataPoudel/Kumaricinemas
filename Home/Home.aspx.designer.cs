@@ -11,97 +11,106 @@ namespace KumariCinemas
 {
 
 
-    public partial class TheatreCityHall
+    public partial class Home
     {
 
         /// <summary>
-        /// txtHallID control.
+        /// lblMovieCount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHallID;
+        protected global::System.Web.UI.WebControls.Label lblMovieCount;
 
         /// <summary>
-        /// txtHallName control.
+        /// lblTicketCount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHallName;
+        protected global::System.Web.UI.WebControls.Label lblTicketCount;
 
         /// <summary>
-        /// txtHallCapacity control.
+        /// lblTotalRevenue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHallCapacity;
+        protected global::System.Web.UI.WebControls.Label lblTotalRevenue;
 
         /// <summary>
-        /// ddlTheatre control.
+        /// lblTheatreCount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTheatre;
+        protected global::System.Web.UI.WebControls.Label lblTheatreCount;
 
         /// <summary>
-        /// btnAddHall control.
+        /// lblShowCount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddHall;
+        protected global::System.Web.UI.WebControls.Label lblShowCount;
 
         /// <summary>
-        /// btnUpdateHall control.
+        /// lblCustomerCount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpdateHall;
+        protected global::System.Web.UI.WebControls.Label lblCustomerCount;
 
         /// <summary>
-        /// btnDeleteHall control.
+        /// lblTotalShows control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDeleteHall;
+        protected global::System.Web.UI.WebControls.Label lblTotalShows;
 
         /// <summary>
-        /// btnClearHall control.
+        /// hdnBookingStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnClearHall;
+        protected global::System.Web.UI.WebControls.HiddenField hdnBookingStatus;
 
         /// <summary>
-        /// lblHallMsg control.
+        /// hdnSlotPopularity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblHallMsg;
+        protected global::System.Web.UI.WebControls.HiddenField hdnSlotPopularity;
 
         /// <summary>
-        /// gvTheatreCityHall control.
+        /// hdnRevenueByGenre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvTheatreCityHall;
+        protected global::System.Web.UI.WebControls.HiddenField hdnRevenueByGenre;
+
+        /// <summary>
+        /// hdnHallOccupancy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnHallOccupancy;
     }
 }

@@ -32,22 +32,22 @@ namespace KumariCinemas
             ddlCustomer.DataSource = DBHelper.GetData(
                 "SELECT CustomerID, CustomerName || ' - ' || Address AS CustomerInfo FROM Customer ORDER BY CustomerName");
             ddlCustomer.DataBind();
+            ddlCustomer.Items.Insert(0, new ListItem("-- Select Customer --", ""));
 
             ddlShow.DataSource = DBHelper.GetData(@"
-                SELECT s.ShowID,
-                       m.MovieTitle || ' | ' || th.theatreName || ' - ' || th.theatreCity ||
-                       ' | ' || h.HallName || ' | ' || TO_CHAR(s.ShowDate,'DD-Mon-YYYY') ||
-                       ' ' || s.ShowTime || ' | Rs.' || s.BasePrice AS ShowInfo
-                FROM Show s
-                JOIN Movie m ON s.MovieID = m.MovieID
-                JOIN Hall h ON s.HallID = h.HallID
-                JOIN Theatre th ON h.theatreId = th.theatreID
-                ORDER BY s.ShowDate");
+        SELECT s.ShowID,
+               m.MovieTitle || ' | ' || th.theatreName || ' - ' || th.theatreCity ||
+               ' | ' || h.HallName || ' | ' || TO_CHAR(s.ShowDate,'DD-Mon-YYYY') ||
+               ' ' || s.ShowTime || ' | Rs.' || s.BasePrice AS ShowInfo
+        FROM Show s
+        JOIN Movie m ON s.MovieID = m.MovieID
+        JOIN Hall h ON s.HallID = h.HallID
+        JOIN Theatre th ON h.theatreId = th.theatreID
+        ORDER BY s.ShowDate");
             ddlShow.DataBind();
+            ddlShow.Items.Insert(0, new ListItem("-- Select Show --", ""));
 
-            // Auto-fill price for first show
-            if (ddlShow.Items.Count > 0)
-                AutoFillPrice(ddlShow.SelectedValue);
+            // Don't auto-fill price since no show is selected by default
         }
 
         void AutoFillPrice(string showID)
@@ -63,7 +63,6 @@ namespace KumariCinemas
         {
             AutoFillPrice(ddlShow.SelectedValue);
         }
-
         void ClearFields()
         {
             txtTicketID.Text = "";
@@ -71,21 +70,28 @@ namespace KumariCinemas
             txtSeatNumber.Text = "";
             txtBookingDate.Text = "";
             lblMessage.Text = "";
-            if (ddlShow.Items.Count > 0) AutoFillPrice(ddlShow.SelectedValue);
+            ddlCustomer.SelectedIndex = 0;
+            ddlShow.SelectedIndex = 0;
+            ddlBookingStatus.SelectedIndex = 0;
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
-                int newID = DBHelper.GetNextID("seq_ticket");
-                txtTicketID.Text = newID.ToString();
+                if (string.IsNullOrWhiteSpace(txtTicketID.Text))
+                {
+                    lblMessage.Text = "✗ Please enter a Ticket ID";
+                    lblMessage.ForeColor = System.Drawing.Color.FromArgb(255, 126, 126);
+                    return;
+                }
+
                 string query = $@"INSERT INTO Ticket (TicketID, CustomerID, ShowID, TicketPrice, SeatNumber, BookingDate, Bookingstatus)
-                                  VALUES ({newID}, {ddlCustomer.SelectedValue}, {ddlShow.SelectedValue},
+                                  VALUES ({txtTicketID.Text}, {ddlCustomer.SelectedValue}, {ddlShow.SelectedValue},
                                   '{txtTicketPrice.Text}', '{txtSeatNumber.Text}',
                                   DATE '{txtBookingDate.Text}', '{ddlBookingStatus.SelectedValue}')";
                 DBHelper.ExecuteQuery(query);
-                lblMessage.Text = $"✓ Ticket added — ID: {newID} | Price: Rs. {txtTicketPrice.Text}";
+                lblMessage.Text = $"✓ Ticket added — ID: {txtTicketID.Text} | Price: Rs. {txtTicketPrice.Text}";
                 lblMessage.ForeColor = System.Drawing.Color.FromArgb(200, 169, 110);
                 LoadTickets();
             }
@@ -100,7 +106,6 @@ namespace KumariCinemas
         {
             try
             {
-                // Re-fetch price from show in case show changed
                 AutoFillPrice(ddlShow.SelectedValue);
                 string query = $@"UPDATE Ticket SET
                                   CustomerID={ddlCustomer.SelectedValue},
@@ -148,11 +153,19 @@ namespace KumariCinemas
             txtSeatNumber.Text = row.Cells[9].Text;
             txtBookingDate.Text = row.Cells[10].Text;
 
-            foreach (System.Web.UI.WebControls.ListItem item in ddlBookingStatus.Items)
+            ddlBookingStatus.ClearSelection();
+            foreach (ListItem item in ddlBookingStatus.Items)
                 if (item.Text == row.Cells[11].Text) { item.Selected = true; break; }
 
-            foreach (System.Web.UI.WebControls.ListItem item in ddlCustomer.Items)
+            ddlCustomer.ClearSelection();
+            foreach (ListItem item in ddlCustomer.Items)
                 if (item.Text.StartsWith(row.Cells[2].Text)) { item.Selected = true; break; }
+
+            ddlShow.ClearSelection();
+            foreach (ListItem item in ddlShow.Items)
+                if (item.Text.StartsWith(row.Cells[3].Text)) { item.Selected = true; break; }
+
+            AutoFillPrice(ddlShow.SelectedValue);
         }
     }
 }

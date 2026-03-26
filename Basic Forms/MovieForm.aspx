@@ -191,9 +191,9 @@
             <h3>Movie Info</h3>
 
             <div class="field">
-                <label>Movie ID</label>
-                <asp:TextBox ID="txtMovieID" runat="server" ReadOnly="true" placeholder="Auto-generated"/>
-            </div>
+    <label>Movie ID</label>
+    <asp:TextBox ID="txtMovieID" runat="server" placeholder="Enter movie ID"/>
+</div>
             <div class="field">
                 <label>Movie Title</label>
                 <asp:TextBox ID="txtMovieTitle" runat="server" placeholder="Enter title"/>
